@@ -2,7 +2,7 @@
 
 A streamer control panel with game enhancement features for FreeFire running on BlueStacks emulator (HD-Player.exe). Built with Python Flask and packaged as a Windows EXE.
 
-> **Formerly known as AXC Corporation** — fully rebranded to REGIX Studio.
+> **DEV </> | REGIX Studio**
 
 ## Features
 
