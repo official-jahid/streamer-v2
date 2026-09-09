@@ -1,0 +1,261 @@
+<!doctype html>
+<html
+  lang="en"
+  class="{{ theme or 'dark' }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Login - REGIX Studio</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/favicon.svg') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/toast.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/components.css') }}" />
+  </head>
+  <body data-login-mode="{{ mode or 'account' }}">
+    <div class="rg-login-wrap">
+      <div class="rg-login-card">
+        <div class="rg-login-card__head">
+          <div
+            class="rg-login-card__top"
+            style="width: 100%">
+            <button
+              type="button"
+              class="rg-icon-btn"
+              data-login-theme
+              aria-label="Toggle theme">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="20"
+                height="20"
+                aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
+          </div>
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="REGIX Studio logo"
+            class="rg-login-card__logo" />
+          <div class="rg-login-card__title">REGIX Studio</div>
+          <div class="rg-login-card__sub">
+            Sign in to continue to your panel
+          </div>
+        </div>
+        <div class="rg-login-card__body">
+          {% if init_error %}
+          <div
+            class="rg-status-note"
+            role="status">
+            <span>Auth service: {{ init_error }}</span>
+          </div>
+          {% endif %} {% if error %}
+          <div
+            class="rg-error"
+            role="alert">
+            <span>{{ error }}</span>
+          </div>
+          {% endif %}
+
+          <div
+            class="rg-tabs"
+            role="tablist"
+            aria-label="Login method">
+            <button
+              type="button"
+              class="rg-tab {% if mode != 'license' %}rg-tab--active{% endif %}"
+              data-login-tab="account"
+              role="tab"
+              aria-selected="{{ 'true' if mode != 'license' else 'false' }}">
+              Account
+            </button>
+            <button
+              type="button"
+              class="rg-tab {% if mode == 'license' %}rg-tab--active{% endif %}"
+              data-login-tab="license"
+              role="tab"
+              aria-selected="{{ 'true' if mode == 'license' else 'false' }}">
+              License key
+            </button>
+          </div>
+
+          <form
+            id="loginFormAccount"
+            method="post"
+            action="/login"
+            data-login-form
+            class="{% if mode == 'license' %}hidden{% endif %}"
+            autocomplete="on">
+            <input
+              type="hidden"
+              name="mode"
+              value="account" />
+            <div style="display: flex; flex-direction: column; gap: 0.875rem">
+              <div class="rg-field">
+                <label
+                  class="rg-label"
+                  for="username"
+                  >Username</label
+                >
+                <input
+                  class="rg-input {% if error and mode != 'license' %}rg-input--error{% endif %}"
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Enter your username"
+                  value="{{ username|e if username else '' }}"
+                  autocomplete="username"
+                  required />
+              </div>
+              <div class="rg-field">
+                <label
+                  class="rg-label"
+                  for="password"
+                  >Password</label
+                >
+                <div class="rg-input-wrap">
+                  <input
+                    class="rg-input {% if error and mode != 'license' %}rg-input--error{% endif %}"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required />
+                  <button
+                    type="button"
+                    class="rg-input__toggle"
+                    data-toggle-password="password"
+                    aria-label="Show or hide password"
+                    aria-pressed="false">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path
+                        d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <label class="rg-check">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  value="1"
+                  {%
+                  if
+                  remember
+                  %}checked{%
+                  endif
+                  %} />
+                Remember me on this PC
+              </label>
+              <button
+                type="submit"
+                class="rg-btn rg-btn--primary rg-btn--block">
+                Login
+              </button>
+            </div>
+          </form>
+
+          <form
+            id="loginFormLicense"
+            method="post"
+            action="/login"
+            data-login-form
+            class="{% if mode != 'license' %}hidden{% endif %}"
+            autocomplete="on">
+            <input
+              type="hidden"
+              name="mode"
+              value="license" />
+            <div style="display: flex; flex-direction: column; gap: 0.875rem">
+              <div class="rg-field">
+                <label
+                  class="rg-label"
+                  for="license_key"
+                  >License key</label
+                >
+                <input
+                  class="rg-input {% if error and mode == 'license' %}rg-input--error{% endif %}"
+                  type="text"
+                  id="license_key"
+                  name="license_key"
+                  placeholder="Enter your license key"
+                  autocomplete="off"
+                  required />
+              </div>
+              <label class="rg-check">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  value="1"
+                  {%
+                  if
+                  remember
+                  %}checked{%
+                  endif
+                  %} />
+                Remember me on this PC
+              </label>
+              <button
+                type="submit"
+                class="rg-btn rg-btn--primary rg-btn--block">
+                Login with key
+              </button>
+            </div>
+          </form>
+
+          <div class="rg-hwid">
+            <span>HWID</span>
+            <code id="hwidValue">{{ hwid or 'unavailable' }}</code>
+            <button
+              type="button"
+              data-copy-hwid>
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="toaster"
+      class="toaster"></div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <script
+      id="flashed-messages"
+      type="application/json">
+      {{ messages | tojson }}
+    </script>
+    {% endif %} {% endwith %}
+
+    <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  </body>
+</html>

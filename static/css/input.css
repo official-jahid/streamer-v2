@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------
+   Geist fonts (Vercel typeface) — bundled locally, OFL license
+   ------------------------------------------------------------ */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Geist-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Geist-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Geist-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Geist-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/GeistMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/GeistMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------
+   Content sources scanned for class names
+   ------------------------------------------------------------ */
+@source "../../templates/**/*.html";
+@source "../../templates/**/*.jinja";
+@source "../js/**/*.js";
+
+/* ------------------------------------------------------------
+   Theme tokens — Vercel monochrome palette (light + dark)
+   Mapped from raw HSL variables so `.dark` overrides work.
+   ------------------------------------------------------------ */
+@theme inline {
+  --font-sans: "Geist", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(142 71% 45%);
+  --color-warning: hsl(38 92% 50%);
+}
+
+/* ------------------------------------------------------------
+   Raw theme variables (light default, dark via .dark class)
+   Vercel: #fff/#000 background, #fafafa/#0a0a0a cards,
+   #171717/#ededed text, #666/#888 secondary, #0070f3 blue.
+   ------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 207 100% 48%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 92%;
+  --input: 0 0% 92%;
+  --ring: 207 100% 48%;
+  --destructive: 0 74% 42%;
+  --destructive-foreground: 0 0% 98%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 0 0% 0%;
+  --foreground: 0 0% 93%;
+  --card: 0 0% 4%;
+  --card-foreground: 0 0% 93%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 93%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 53%;
+  --accent: 207 100% 48%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 16%;
+  --input: 0 0% 16%;
+  --ring: 207 100% 48%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+}
+
+/* ------------------------------------------------------------
+   Base
+   ------------------------------------------------------------ */
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  a {
+    outline: none;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}

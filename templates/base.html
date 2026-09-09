@@ -1,0 +1,76 @@
+<!doctype html>
+<html
+  lang="en"
+  class="{{ theme or 'dark' }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>REGIX Studio</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/favicon.svg') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/toast.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/components.css') }}" />
+  </head>
+
+  <body>
+    {% import 'partials/header.jinja' as Header %} {% import
+    'partials/sidebar.jinja' as Sidebar %} {{ Header.Header(active|default(0))
+    }}
+
+    <div class="rg-layout">
+      <!-- Desktop sidebar (fixed, non-resizable) -->
+      <aside class="rg-layout__sidebar">
+        {{ Sidebar.Sidebar(active|default(0)) }}
+      </aside>
+
+      <!-- Main content -->
+      <main class="rg-layout__main">
+        {% block body %} {% endblock %}
+      </main>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div
+      id="mobileDrawer"
+      class="rg-drawer"
+      aria-hidden="true">
+      <div
+        id="mobileDrawerOverlay"
+        class="rg-sidebar-overlay"></div>
+      <div class="rg-drawer__panel">
+        {{ Sidebar.Sidebar(active|default(0)) }}
+      </div>
+    </div>
+
+    <div
+      id="toaster"
+      class="toaster"></div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <script
+      id="flashed-messages"
+      type="application/json">
+      {{ messages | tojson }}
+    </script>
+    {% endif %} {% endwith %}
+
+    <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/headshot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sniper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/extra.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+  </body>
+</html>

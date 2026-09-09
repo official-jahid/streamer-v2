@@ -1,0 +1,45 @@
+{% macro Headshot(args) %}
+<section class="rg-card">
+    <div class="rg-card__header">
+        <div class="rg-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="2" x2="12" y2="6"></line>
+                <line x1="12" y1="18" x2="12" y2="22"></line>
+                <line x1="2" y1="12" x2="6" y2="12"></line>
+                <line x1="18" y1="12" x2="22" y2="12"></line>
+            </svg>
+        </div>
+        <div>
+            <h2 class="rg-card__title">Aimbot</h2>
+            <p class="rg-card__desc">Headshot and drag assist</p>
+        </div>
+    </div>
+    <div class="rg-card__body">
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">Aimbot</h3>
+                <p class="rg-feature__desc">Scan and load aimbot addresses</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="aimbotLoad" class="rg-btn rg-btn--secondary rg-btn--sm">Load</button>
+                <button id="aimbotToggle" type="button" class="rg-switch" role="switch" aria-checked="false" data-feature="aimbot" aria-label="Toggle aimbot">
+                    <span class="rg-switch__thumb"></span>
+                </button>
+            </div>
+        </div>
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">Aimbot Drag</h3>
+                <p class="rg-feature__desc">Scan and load aimbot drag addresses</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="dragLoad" class="rg-btn rg-btn--secondary rg-btn--sm">Load</button>
+                <button id="dragToggle" type="button" class="rg-switch" role="switch" aria-checked="false" data-feature="aimdrag" aria-label="Toggle aimbot drag">
+                    <span class="rg-switch__thumb"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endmacro %}

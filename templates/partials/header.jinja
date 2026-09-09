@@ -1,0 +1,45 @@
+{% macro Header(active) %}
+{% set titles = {1: 'Headshot', 2: 'Sniper', 3: 'Extra', 4: 'Settings'} %}
+<header class="rg-header">
+    <div class="flex items-center gap-3">
+        <button type="button" id="sidebarToggle" class="rg-hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+        </button>
+        <h1 class="rg-header__title">{{ titles.get(active, 'Dashboard') }}</h1>
+    </div>
+    <div class="flex items-center gap-2">
+        <div class="rg-segmented" role="group" aria-label="FreeFire bit version">
+            <button type="button" id="btn1" class="rg-segmented__btn">32-bit</button>
+            <button type="button" id="btn2" class="rg-segmented__btn">64-bit</button>
+        </div>
+        <button type="button" id="headerThemeToggle" class="rg-icon-btn" aria-label="Toggle theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+        </button>
+        <div class="relative">
+            <button type="button" id="notificationBell" class="rg-icon-btn" aria-label="Notifications" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                </svg>
+                <span id="notificationBadge" class="rg-notification-badge hidden"></span>
+            </button>
+            <div id="notificationPanel" class="rg-notification-panel hidden" aria-hidden="true" role="region" aria-label="Notification centre">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <h3 class="text-sm font-semibold text-card-foreground">Notifications</h3>
+                    <button type="button" id="notificationClearAll" class="rg-btn rg-btn--secondary rg-btn--sm">Clear All</button>
+                </div>
+                <div id="notificationEmpty" class="px-4 py-8 text-center text-sm text-muted-foreground">
+                    No notifications
+                </div>
+                <ul id="notificationList" class="max-h-80 overflow-y-auto"></ul>
+            </div>
+        </div>
+    </div>
+</header>
+{% endmacro %}

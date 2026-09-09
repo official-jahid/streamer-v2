@@ -1,0 +1,66 @@
+{% macro Sidebar(active) %}
+<nav class="rg-sidebar" aria-label="Main navigation">
+    <a href="/dashboard" class="rg-sidebar__brand">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="REGIX Studio logo" />
+        <span>REGIX Studio</span>
+    </a>
+    <div class="rg-sidebar__nav">
+        <a href="/dashboard" class="rg-sidebar__link {% if active == 1 %}rg-sidebar__link--active{% endif %}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+            </svg>
+            <span class="rg-sidebar__label">Headshot</span>
+        </a>
+        <a href="/sniper-panel" class="rg-sidebar__link {% if active == 2 %}rg-sidebar__link--active{% endif %}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <span class="rg-sidebar__label">Sniper</span>
+        </a>
+        <a href="/extra-panel" class="rg-sidebar__link {% if active == 3 %}rg-sidebar__link--active{% endif %}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2v20"></path>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            <span class="rg-sidebar__label">Extra</span>
+        </a>
+        <a href="/settings" class="rg-sidebar__link {% if active == 4 %}rg-sidebar__link--active{% endif %}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span class="rg-sidebar__label">Settings</span>
+        </a>
+    </div>
+    <div class="rg-sidebar__footer">
+        <span id="sidebarStatus" class="rg-status-pill rg-status-pill--offline">
+            <span class="rg-status-pill__dot"></span>
+            <span id="sidebarStatusText">Offline</span>
+        </span>
+        {% set account = session.get('user') if session else None %}
+        {% if account and account.get('username') %}
+        {% set subs = account.get('subscriptions') or [] %}
+        <div class="rg-account">
+            <div class="rg-account__row">
+                <span class="rg-account__avatar" aria-hidden="true">{{ account.get('username', '?')[:1] | upper }}</span>
+                <div class="rg-account__meta">
+                    <div class="rg-account__name">{{ account.get('username', '') }}</div>
+                    <div class="rg-account__sub">{{ account.get('subscription', '') }}</div>
+                </div>
+            </div>
+            {% for sub in (subs[:3] if subs else []) %}
+            <div class="rg-account__expiry">{{ sub.get('subscription', '') }} <strong>{{ sub.get('expiry_label') or sub.get('expiry', '') }}</strong></div>
+            {% endfor %}
+            {% if not subs %}
+            <div class="rg-account__expiry">Expires <strong>{{ account.get('expires_label') or account.get('expires', '') }}</strong></div>
+            {% endif %}
+            <a href="/logout" class="rg-btn rg-btn--secondary rg-btn--sm" style="width: 100%">Logout</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
+{% endmacro %}
