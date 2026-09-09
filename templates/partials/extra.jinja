@@ -1,0 +1,58 @@
+{% macro Extra(args) %}
+<section class="rg-card">
+    <div class="rg-card__header">
+        <div class="rg-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2v20"></path>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+        </div>
+        <div>
+            <h2 class="rg-card__title">ESP</h2>
+            <p class="rg-card__desc">Enemy visibility and wallhack tools</p>
+        </div>
+    </div>
+    <div class="rg-card__body">
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">M82B ESP</h3>
+                <p class="rg-feature__desc">Applies every match</p>
+            </div>
+            <button id="m82bToggle" type="button" class="rg-switch" role="switch" aria-checked="false" data-feature="m82b" aria-label="Toggle M82B ESP">
+                <span class="rg-switch__thumb"></span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="rg-card">
+    <div class="rg-card__header">
+        <div class="rg-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        </div>
+        <div>
+            <h2 class="rg-card__title">Visuals</h2>
+            <p class="rg-card__desc">Chams and wallhack injection</p>
+        </div>
+    </div>
+    <div class="rg-card__body">
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">Chams Menu</h3>
+                <p class="rg-feature__desc">Load the chams menu</p>
+            </div>
+            <button id="chamsmenu" class="rg-btn rg-btn--secondary rg-btn--sm">Load</button>
+        </div>
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">Chams 3D</h3>
+                <p class="rg-feature__desc">Load chams 3D</p>
+            </div>
+            <button id="chams3d" class="rg-btn rg-btn--secondary rg-btn--sm">Load</button>
+        </div>
+    </div>
+</section>
+{% endmacro %}

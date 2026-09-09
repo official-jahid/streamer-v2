@@ -1,0 +1,1062 @@
+/* ============================================
+   REGIX Studio — UI Components (Vercel theme)
+   Layout · Sidebar · Header · Switch · Segmented
+   Status Pill · Buttons · Cards · Features
+   Notification Centre · Hotkey Input · Login
+   --------------------------------------------
+   Design language: vercel.com — Geist type,
+   monochrome, blue #0070f3 accent, 8px cards,
+   6px controls, soft shadows, NO borders,
+   NO tooltips. Separate with contrast + shadow.
+   ============================================ */
+
+/* ------------------------------------------------------------
+   Layout — fixed sidebar + scrollable main
+   ------------------------------------------------------------ */
+.rg-layout {
+  display: flex;
+  height: calc(100vh - 4rem);
+}
+
+.rg-layout__sidebar {
+  display: none;
+  flex: 0 0 16rem;
+  min-width: 0;
+}
+
+.rg-layout__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .rg-layout__sidebar {
+    display: block;
+  }
+}
+
+/* Page content container */
+.rg-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+/* ------------------------------------------------------------
+   Scrollbars — thin, theme-aware
+   ------------------------------------------------------------ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.4) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.35);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.55);
+}
+
+/* ------------------------------------------------------------
+   Elevation tokens — Vercel soft shadows (borderless separation)
+   ------------------------------------------------------------ */
+:root {
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-pop:
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.dark {
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 8px 28px rgba(0, 0, 0, 0.4);
+  --shadow-pop:
+    0 2px 8px rgba(0, 0, 0, 0.55),
+    0 20px 48px rgba(0, 0, 0, 0.55);
+}
+
+/* ------------------------------------------------------------
+   Header — floating glass bar, no border
+   ------------------------------------------------------------ */
+.rg-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 4rem;
+  padding: 0 1rem;
+  background: hsl(var(--background) / 0.75);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+}
+
+.rg-header__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: hsl(var(--card-foreground));
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   Icon button (theme toggle, notification bell)
+   ------------------------------------------------------------ */
+.rg-icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.rg-icon-btn:hover {
+  background: hsl(var(--muted));
+}
+
+/* ------------------------------------------------------------
+   Hamburger (mobile)
+   ------------------------------------------------------------ */
+.rg-hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.rg-hamburger:hover {
+  background: hsl(var(--muted));
+}
+
+@media (min-width: 1024px) {
+  .rg-hamburger {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   Segmented control (32-bit / 64-bit)
+   ------------------------------------------------------------ */
+.rg-segmented {
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  padding: 0.1875rem;
+  border-radius: calc(var(--radius) - 1px);
+  background: hsl(var(--secondary));
+}
+
+.rg-segmented__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.875rem;
+  padding: 0 0.75rem;
+  border-radius: calc(var(--radius) - 3px);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.rg-segmented__btn:hover {
+  color: hsl(var(--foreground));
+}
+
+.rg-segmented__btn--active {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.dark .rg-segmented__btn--active {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.rg-segmented__btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------
+   Sidebar — seamless with the background, no border
+   ------------------------------------------------------------ */
+.rg-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0.75rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.rg-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.75rem 1.25rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.rg-sidebar__brand img {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  object-fit: cover;
+}
+
+.rg-sidebar__brand span {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: hsl(var(--foreground));
+}
+
+.rg-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.rg-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.rg-sidebar__link svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.rg-sidebar__link:hover {
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+}
+
+.rg-sidebar__link--active {
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+.rg-sidebar__label {
+  white-space: nowrap;
+}
+
+.rg-sidebar__footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Account block (sidebar footer) */
+.rg-account {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  box-shadow: var(--shadow-card);
+}
+
+.rg-account__row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.rg-account__avatar {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.rg-account__meta {
+  min-width: 0;
+}
+
+.rg-account__name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rg-account__sub {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rg-account__expiry {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.rg-account__expiry strong {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   Status pill — dot + label, no border
+   ------------------------------------------------------------ */
+.rg-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 1.875rem;
+  padding: 0 0.75rem;
+  border-radius: 9999px;
+  background: hsl(var(--secondary));
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: hsl(var(--secondary-foreground));
+  width: fit-content;
+}
+
+.rg-status-pill__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: hsl(var(--muted-foreground));
+  flex-shrink: 0;
+}
+
+.rg-status-pill--offline .rg-status-pill__dot {
+  background: hsl(0 0% 55%);
+}
+
+.rg-status-pill--online .rg-status-pill__dot {
+  background: hsl(var(--accent));
+  box-shadow: 0 0 0 3px hsl(var(--accent) / 0.2);
+}
+
+.rg-status-pill--online {
+  color: hsl(var(--foreground));
+}
+
+/* ------------------------------------------------------------
+   Mobile drawer — floating panel, shadow only
+   ------------------------------------------------------------ */
+.rg-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.rg-sidebar-overlay--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rg-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+}
+
+.rg-drawer--open {
+  display: block;
+}
+
+.rg-drawer__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 16rem;
+  max-width: 82vw;
+  background: hsl(var(--background));
+  box-shadow: var(--shadow-pop);
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+}
+
+.rg-drawer--open .rg-drawer__panel {
+  transform: translateX(0);
+}
+
+/* ------------------------------------------------------------
+   Buttons — Vercel style: 6px radius, contrast hover, no borders
+   ------------------------------------------------------------ */
+.rg-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.006em;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.rg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rg-btn--sm {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.rg-btn--block {
+  width: 100%;
+  height: 2.5rem;
+  font-size: 0.875rem;
+}
+
+/* Primary: black on light / white on dark (Vercel CTA) */
+.rg-btn--primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.rg-btn--primary:hover:not(:disabled) {
+  opacity: 0.86;
+}
+
+/* Secondary: quiet gray surface */
+.rg-btn--secondary {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.rg-btn--secondary:hover:not(:disabled) {
+  background: hsl(var(--muted));
+}
+
+/* Success state (status button) — Vercel blue accent */
+.rg-btn--success {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.rg-btn--success:hover:not(:disabled) {
+  background: hsl(var(--accent));
+  opacity: 0.88;
+}
+
+/* Loading state */
+.rg-btn--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------
+   Toggle switch — Vercel style, ON = blue #0070f3, OFF = gray
+   ------------------------------------------------------------ */
+.rg-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: hsl(var(--muted));
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  padding: 0;
+}
+
+.rg-switch__thumb {
+  position: absolute;
+  left: 0.1875rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease;
+}
+
+.rg-switch[aria-checked="true"] {
+  background: hsl(var(--accent));
+}
+
+.rg-switch[aria-checked="true"] .rg-switch__thumb {
+  transform: translateX(1rem);
+}
+
+.rg-switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------
+   Cards — Vercel surface, shadow elevation, no border
+   ------------------------------------------------------------ */
+.rg-card {
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.rg-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.125rem 1.25rem 0.875rem;
+}
+
+.rg-card__icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--secondary));
+  color: hsl(var(--muted-foreground));
+}
+
+.rg-card__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.rg-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: hsl(var(--card-foreground));
+}
+
+.rg-card__desc {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.rg-card__body {
+  padding: 0 1.25rem 1.125rem;
+}
+
+/* ------------------------------------------------------------
+   Feature rows — separated by spacing only, no border
+   ------------------------------------------------------------ */
+.rg-feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 0;
+}
+
+.rg-feature + .rg-feature {
+  padding-top: 0.875rem;
+}
+
+.rg-feature--stack {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rg-feature__info {
+  min-width: 0;
+}
+
+.rg-feature__name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--card-foreground));
+}
+
+.rg-feature__desc {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* ------------------------------------------------------------
+   Notification centre — bell badge + floating panel, no border
+   ------------------------------------------------------------ */
+.rg-notification-badge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+  color: hsl(var(--accent-foreground));
+  background: hsl(var(--accent));
+  border-radius: 9999px;
+  box-shadow: 0 0 0 2px hsl(var(--background));
+}
+
+.rg-notification-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 50;
+  width: 22rem;
+  max-width: calc(100vw - 2rem);
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-pop);
+  overflow: hidden;
+}
+
+.notification-item--unread {
+  background: hsl(var(--accent) / 0.08);
+}
+
+.notification-item--unread::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: hsl(var(--accent));
+  flex-shrink: 0;
+  margin-left: -0.5rem;
+}
+
+.notification-item__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+}
+
+.notification-item__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.notification-item__icon--success {
+  color: #0070f3;
+}
+
+.notification-item__icon--info {
+  color: hsl(var(--muted-foreground));
+}
+
+.notification-item__icon--warning {
+  color: #f5a623;
+}
+
+.notification-item__icon--error {
+  color: #e5484d;
+}
+
+.notification-item__icon--loading {
+  color: hsl(var(--muted-foreground));
+}
+
+.notification-item__dismiss {
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   Hotkey configuration (settings page) — Geist Mono chips
+   ------------------------------------------------------------ */
+.hotkey-input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6rem;
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  background: hsl(var(--secondary));
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+.hotkey-input:hover {
+  background: hsl(var(--muted));
+}
+
+.hotkey-input--recording {
+  background: hsl(var(--accent) / 0.12);
+  box-shadow: 0 0 0 2px hsl(var(--accent) / 0.45);
+  color: hsl(var(--accent));
+}
+
+/* ------------------------------------------------------------
+   Forms — labels, inputs, errors (login)
+   ------------------------------------------------------------ */
+.rg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.rg-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.rg-input {
+  height: 2.5rem;
+  width: 100%;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  border-radius: calc(var(--radius) - 2px);
+  box-shadow: 0 0 0 1px hsl(var(--muted-foreground) / 0.18);
+  transition:
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.rg-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.rg-input:hover {
+  box-shadow: 0 0 0 1px hsl(var(--muted-foreground) / 0.32);
+}
+
+.rg-input:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 1px hsl(var(--accent)),
+    0 0 0 4px hsl(var(--accent) / 0.18);
+}
+
+.rg-input--error {
+  box-shadow:
+    0 0 0 1px hsl(var(--destructive)),
+    0 0 0 4px hsl(var(--destructive) / 0.15);
+}
+
+.rg-input-wrap {
+  position: relative;
+}
+
+.rg-input-wrap .rg-input {
+  padding-right: 2.5rem;
+}
+
+.rg-input__toggle {
+  position: absolute;
+  right: 0.375rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: calc(var(--radius) - 3px);
+  color: hsl(var(--muted-foreground));
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.rg-input__toggle:hover {
+  color: hsl(var(--foreground));
+}
+
+.rg-input__toggle svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.rg-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  user-select: none;
+}
+
+.rg-check input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: hsl(var(--accent));
+  cursor: pointer;
+}
+
+/* Status + error notes on the login card */
+.rg-status-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--secondary));
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8125rem;
+}
+
+.rg-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------
+   Login tabs — Vercel segmented tabs, no border
+   ------------------------------------------------------------ */
+.rg-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  padding: 0.1875rem;
+  border-radius: calc(var(--radius) - 1px);
+  background: hsl(var(--secondary));
+}
+
+.rg-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.875rem;
+  border-radius: calc(var(--radius) - 3px);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.rg-tab:hover {
+  color: hsl(var(--foreground));
+}
+
+.rg-tab--active {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.dark .rg-tab--active {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+/* ------------------------------------------------------------
+   HWID row (login footer)
+   ------------------------------------------------------------ */
+.rg-hwid {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.rg-hwid span {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rg-hwid code {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: hsl(var(--foreground));
+  background: hsl(var(--secondary));
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--radius) - 3px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 12rem;
+}
+
+.rg-hwid button {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: hsl(var(--accent));
+  background: transparent;
+  cursor: pointer;
+}
+
+.rg-hwid button:hover {
+  opacity: 0.8;
+}
+
+/* ------------------------------------------------------------
+   Login page — centered Vercel-style auth card
+   ------------------------------------------------------------ */
+.rg-login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background:
+    radial-gradient(
+      60% 50% at 50% 0%,
+      hsl(var(--accent) / 0.07),
+      transparent 70%
+    ),
+    hsl(var(--background));
+}
+
+.rg-login-card {
+  width: 100%;
+  max-width: 24rem;
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-pop);
+  padding: 2rem 1.5rem 1.5rem;
+}
+
+.rg-login-card__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.5rem;
+}
+
+.rg-login-card__top {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.rg-login-card__logo {
+  width: 3rem;
+  height: 3rem;
+  border-radius: calc(var(--radius) - 1px);
+  object-fit: cover;
+  box-shadow: var(--shadow-card);
+}
+
+.rg-login-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
+}
+
+.rg-login-card__sub {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.rg-login-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

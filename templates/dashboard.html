@@ -1,0 +1,6 @@
+{% extends 'base.html' %} {% import 'partials/Status.jinja' as Status %} {%
+import 'partials/Headshot.jinja' as Headshot %} {% block body %}
+<div class="rg-page">
+  {{ Status.Status(version) }} {{ Headshot.Headshot() }}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% macro Status(version) %}
+<section class="rg-card">
+    <div class="flex items-center justify-between gap-4 p-6">
+        <div>
+            <h2 class="text-lg font-semibold tracking-tight text-card-foreground">Status</h2>
+            <p class="mt-0.5 text-sm text-muted-foreground">Welcome to REGIX Studio</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="onlinebtn" class="rg-btn rg-btn--secondary">Offline</button>
+            <span class="text-sm text-muted-foreground">v{{ version }}</span>
+        </div>
+    </div>
+</section>
+{% endmacro %}

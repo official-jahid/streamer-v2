@@ -1,0 +1,37 @@
+{% macro Sniper(args) %}
+<section class="rg-card">
+    <div class="rg-card__header">
+        <div class="rg-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+        </div>
+        <div>
+            <h2 class="rg-card__title">Sniper</h2>
+            <p class="rg-card__desc">Scope and weapon switch tools</p>
+        </div>
+    </div>
+    <div class="rg-card__body">
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">Sniper Scope</h3>
+                <p class="rg-feature__desc">Applies every match</p>
+            </div>
+            <button id="scopeToggle" type="button" class="rg-switch" role="switch" aria-checked="false" data-feature="scope" aria-label="Toggle sniper scope">
+                <span class="rg-switch__thumb"></span>
+            </button>
+        </div>
+        <div class="rg-feature">
+            <div class="rg-feature__info">
+                <h3 class="rg-feature__name">Sniper Switch</h3>
+                <p class="rg-feature__desc">Applies every match</p>
+            </div>
+            <button id="switchToggle" type="button" class="rg-switch" role="switch" aria-checked="false" data-feature="switch" aria-label="Toggle sniper switch">
+                <span class="rg-switch__thumb"></span>
+            </button>
+        </div>
+    </div>
+</section>
+{% endmacro %}
