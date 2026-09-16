@@ -16,9 +16,9 @@ from uuid import uuid4
 
 import requests
 
-APP_NAME = "regix bios"
+APP_NAME = "regix streamer"
 OWNER_ID = "RTgStl6UQK"
-APP_SECRET = "d7b3c14090d628116c0497ab4fe0852dc550af73fdd73afabaa2d8ca9c133eac"
+APP_SECRET = "c5ffe131819fdd5183e5e4c0b69d527550ffa21217274429e8484818a93f68fe"
 APP_VERSION = "1.0"
 # Stable exempt checksum (see AGENTS.md / plan). Replace with a real
 # file hash once the EXE hash is whitelisted in the dashboard.
