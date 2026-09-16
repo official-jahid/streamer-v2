@@ -180,6 +180,7 @@ rmdir /s /q build dist
 - Always ask one question at a time. Never batch unrelated questions.
 - One answer can change the next question, so always wait for the answer before asking the following question.
 - Keep asking until no loose ends remain; only then present the final plan.
+- Remember: Always ask one question at a time, because one question's answer can affect the next questions and its answers.
 
 ## Link Buttons In Jinja
 
